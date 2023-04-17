@@ -7,8 +7,6 @@
     <h1>Add Property</h1>
     <form method="post" action="{% url 'add_property' %}">
         {% csrf_token %}
-        <label for="property_id">Property ID:</label>
-        <input type="text" name="property_id" id="property_id" required><br>
         <label for="client_details">Client Details:</label>
         <input type="text" name="client_details" id="client_details" required><br>
         <label for="property_address">Property Address:</label>
