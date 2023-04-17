@@ -11,7 +11,8 @@
             <strong>Property ID:</strong> {{ property.property_id }}<br>
             <strong>Client Details:</strong> {{ property.client_details }}<br>
             <strong>Property Address:</strong> {{ property.property_address }}<br>
-            
+            <a href="{% url 'add_house' property.property_id %}">Add House</a> | 
+            <a href="{% url 'tenant_profile' tenant_id=property.house.tenant.tenant_id %}">Tenant Profile</a>
         </li>
     {% empty %}
         <li>No properties found.</li>
