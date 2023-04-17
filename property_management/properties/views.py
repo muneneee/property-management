@@ -12,3 +12,8 @@ def add_property(request):
         property.save()
         return redirect('/view_properties')
     return render(request, 'add_property.html')
+
+
+def property_list(request):
+    properties = Property.objects.all()
+    return render(request, 'property_list.html', {'properties': properties})

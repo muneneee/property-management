@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Property List</title>
+</head>
+<body>
+    <h1>Property List</h1>
+    <ul>
+    {% for property in properties %}
+        <li>
+            <strong>Property ID:</strong> {{ property.property_id }}<br>
+            <strong>Client Details:</strong> {{ property.client_details }}<br>
+            <strong>Property Address:</strong> {{ property.property_address }}<br>
+            
+        </li>
+    {% empty %}
+        <li>No properties found.</li>
+    {% endfor %}
+    </ul>
+    <a href="{% url 'add_property' %}">Add Property</a>
+</body>
+</html>
