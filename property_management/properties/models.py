@@ -1,14 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Agent(models.Model):
-    agent_id = models.CharField(max_length=20)
-    name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
-
 
 class Property(models.Model):
-    agent = models.ForeignKey(Agent, on_delete=models.CASCADE)
     property_id = models.CharField(max_length=20)
     client_details = models.CharField(max_length=100)
     property_address = models.CharField(max_length=100)
