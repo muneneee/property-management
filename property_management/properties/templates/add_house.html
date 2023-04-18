@@ -7,16 +7,14 @@
     <h1>Add House</h1>
     <form method="post">
         {% csrf_token %}
-        <label for="property_id">Property ID:</label>
-        <input type="text" name="property_id" value="{{ property_id }}" readonly><br>
         <label for="house_number">House Number:</label>
         <input type="text" name="house_number" required><br>
         <label for="house_size">House Size:</label>
         <input type="text" name="house_size" required><br>
-        <label for="rent_amount">Rent Amount:</label>
-        <input type="text" name="rent_amount" required><br>
-        <label for="deposit_amount">Deposit Amount:</label>
-        <input type="text" name="deposit_amount" required><br>
+        <label for="house_rent">Rent Amount:</label>
+        <input type="text" name="house_rent" required><br>
+        <label for="deposit">Deposit Amount:</label>
+        <input type="text" name="deposit" required><br>
         <input type="submit" value="Add House">
     </form>
     <a href="{% url 'property_list' %}">Back to Property List</a>

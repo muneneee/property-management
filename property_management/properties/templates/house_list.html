@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>House List</title>
+</head>
+<body>
+    <h1>House List for {{ property.property_address }}</h1>
+    <a href="{% url 'add_house' property_id=property.property_id %}">Add House</a>
+    <ul>
+        {% for house in houses %}
+            <li>
+                <h3>House ID: {{ house.house_id }}</h3>
+                <p>Rent: {{ house.house_rent }}</p>
+                <p>Deposit: {{ house.deposit }}</p>
+                <a href="{% url 'tenant_profile' tenant_id=house.tenant.tenant_id %}">View Tenant</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'property_list' %}">Back to Property List</a>
+</body>
+</html>
