@@ -36,3 +36,16 @@ def house_list(request, property_id):
     houses = House.objects.filter(property__property_id=property_id)
     property = Property.objects.get(property_id=property_id)
     return render(request, 'house_list.html', {'houses': houses, 'property': property})
+
+def add_tenant(request, house_id):
+    house = House.objects.get(house_id=house_id)
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        contact_info = request.POST.get('contact_info')
+        # house_id = request.POST.get('house_id')
+
+        tenant = Tenant(house=house, name=name, contact_info=contact_info)
+        tenant.save()
+
+        return redirect('/house_list')
+    return render(request, 'add_tenant.html', {'house': house})
