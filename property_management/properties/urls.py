@@ -8,6 +8,7 @@ urlpatterns = [
     path('add_house/<str:property_id>/', add_house, name='add_house'),
     path('property/<int:property_id>/', house_list, name='house_list'),
     path('tenant/<int:house_id>/', add_tenant, name='add_tenant'),
+    path('tenant/add/', add_tenant, name='add_tenant'),
 
 
 ]

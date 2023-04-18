@@ -15,13 +15,13 @@
         <br>
         <label for="house">House:</label>
         <select name="house" id="house" required>
-            {% for house in houses %}
-            <option value="{{ house.house_id }}">{{ house.property.property_address }} - {{ house.house_rent }}</option>
-            {% endfor %}
+          {% for house in houses %}
+          <option value="{{ house.house_id }}">{{ house.property.property_address }} - {{ house.house_rent }}</option>
+          {% endfor %}
         </select>
         <br>
-        <input type="submit" value="Add Tenant">
-    </form>
+        <button type="submit">Submit</button>
+      </form>
     <a href="{% url 'property_list' %}">Back to Property List</a>
 </body>
 </html>
