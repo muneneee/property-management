@@ -1,22 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add House</title>
-</head>
-<body>
-    <h1>Add House</h1>
-    <form method="post">
-        {% csrf_token %}
-        <label for="house_number">House Number:</label>
-        <input type="text" name="house_number" required><br>
-        <label for="house_size">House Size:</label>
-        <input type="text" name="house_size" required><br>
-        <label for="house_rent">Rent Amount:</label>
-        <input type="text" name="house_rent" required><br>
-        <label for="deposit">Deposit Amount:</label>
-        <input type="text" name="deposit" required><br>
-        <input type="submit" value="Add House">
-    </form>
-    <a href="{% url 'property_list' %}">Back to Property List</a>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Add House</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Add House">
+  </form>
+{% endblock %}

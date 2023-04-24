@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add Property</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Add Property{% endblock %}
+
+{% block content %}
     <h1>Add Property</h1>
-    <form method="post" action="{% url 'add_property' %}">
+    <form method="post">
         {% csrf_token %}
-        <label for="client_details">Client Details:</label>
-        <input type="text" name="client_details" id="client_details" required><br>
-        <label for="property_address">Property Address:</label>
-        <input type="text" name="property_address" id="property_address" required><br>
-        <input type="submit" value="Add Property">
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
     </form>
-</body>
-</html>
+{% endblock %}

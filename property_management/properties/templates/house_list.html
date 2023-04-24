@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>House List</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
     <h1>House List for {{ property.property_address }}</h1>
     <a href="{% url 'add_house' property_id=property.property_id %}">Add House</a>
     <ul>
@@ -17,5 +14,4 @@
         {% endfor %}
     </ul>
     <a href="{% url 'property_list' %}">Back to Property List</a>
-</body>
-</html>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+    <h1>Invoice Details</h1>
+    <p>Invoice ID: {{ invoice.invoice_id }}</p>
+    <p>Tenant: {{ invoice.tenant }}</p>
+    <p>Rent: {{ invoice.rent }}</p>
+    <p>Garbage Service: {{ invoice.garbage_service }}</p>
+{% endblock %}

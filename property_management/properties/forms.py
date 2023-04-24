@@ -22,3 +22,6 @@ class PropertyForm(forms.ModelForm):
         model = Property
         fields = ('client_details', 'property_address')
 
+class InvoiceForm(forms.Form):
+    rent = forms.DecimalField(label='Rent', max_digits=8, decimal_places=2)
+    garbage_service = forms.DecimalField(label='Garbage Service', max_digits=8, decimal_places=2)

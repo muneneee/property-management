@@ -1,17 +1,17 @@
 from django.shortcuts import render, redirect
 from .models import Property, House, Tenant, Invoice, Receipt
+from .forms import TenantForm, HouseForm, PropertyForm, InvoiceForm
 
 
 def add_property(request):
     if request.method == 'POST':
-        
-        client_details = request.POST['client_details']
-        property_address = request.POST['property_address']
-        # Create property object and save to the database
-        property = Property(client_details=client_details, property_address=property_address)
-        property.save()
-        return redirect('/view_properties')
-    return render(request, 'add_property.html')
+        form = PropertyForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('property_list')
+    else:
+        form = PropertyForm()
+    return render(request, 'add_property.html', {'form': form})
 
 
 def property_list(request):
@@ -21,16 +21,15 @@ def property_list(request):
 def add_house(request, property_id):
     property = Property.objects.get(property_id=property_id)
     if request.method == 'POST':
-        # Get data from form
-        house_rent = request.POST.get('house_rent')
-        deposit = request.POST.get('deposit')
-        
-        # Create House object and save to database
-        house = House(property=property, house_rent=house_rent, deposit=deposit)
-        house.save()
-        
-        return redirect('/view_properties')
-    return render(request, 'add_house.html', {'property': property})
+        form = HouseForm(request.POST)
+        if form.is_valid():
+            house = form.save(commit=False)
+            house.property = property
+            house.save()
+            return redirect('house_list', property_id=property_id)
+    else:
+        form = HouseForm()
+    return render(request, 'add_house.html', {'form': form, 'property': property})
 
 def house_list(request, property_id):
     houses = House.objects.filter(property__property_id=property_id)
@@ -39,12 +38,21 @@ def house_list(request, property_id):
 
 def add_tenant(request):
     if request.method == 'POST':
-        name = request.POST['name']
-        contact_info = request.POST['contact_info']
-        house_id = request.POST.get('house_id')
-        house = House.objects.get(house_id=house_id)
-        tenant = Tenant(name=name, contact_info=contact_info, house=house)
-        tenant.save()
-        return redirect('tenant_list')
-    houses = House.objects.all()
-    return render(request, 'add_tenant.html', {'houses': houses})
+        form = TenantForm(request.POST)
+        if form.is_valid():
+            tenant = form.save()
+            #  invoice for the tenant
+            rent = 200  # Fixed rent amount
+            garbage_service = 200  # Fixed garbage service amount
+            invoice = Invoice(tenant=tenant, rent=rent, garbage_service=garbage_service)
+            invoice.save()           
+            return redirect('property_list')
+    else:
+        form = TenantForm()
+        invoice_form = InvoiceForm()
+
+    return render(request, 'add_tenant.html', {'form': form, 'invoice_form': invoice_form})
+
+def invoice_detail(request, invoice_id):
+    invoice = Invoice.objects.get(invoice_id=invoice_id)
+    return render(request, 'invoice_detail.html', {'invoice': invoice})
